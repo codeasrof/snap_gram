@@ -15,12 +15,13 @@ import { SignupValidationSchema } from "@/lib/validation"
 import { useState } from "react"
 import Loader from "@/components/shared/Loader"
 import { Link } from "react-router-dom"
+import { createUserAccount } from "@/lib/appwrite/api"
 
 
 
 const SignupForm = () => {
   const [isLoading, setIsLoading] = useState(false)
-  
+
   const form = useForm<z.infer<typeof SignupValidationSchema>>({
     resolver: zodResolver(SignupValidationSchema),
     defaultValues:{
@@ -32,10 +33,9 @@ const SignupForm = () => {
   })
 
  // 2. Define a submit handler.
- function onSubmit(values: z.infer<typeof SignupValidationSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+ async function onSubmit(values: z.infer<typeof SignupValidationSchema>) {
+    const newUser = await createUserAccount(values)
+    console.log(newUser)
   }
 
 
