@@ -37,6 +37,7 @@ const SignupForm = () => {
     setIsLoading(true)
     const newUser = await createUserAccount(values)
     console.log(newUser)
+    setIsLoading(false)
   }
 
 
@@ -92,7 +93,7 @@ const SignupForm = () => {
 
                 <FormField
                 control={form.control}
-                name="email"
+                name="password"
                 render={({ field }) => (
                     <FormItem>
                     <FormLabel>Password</FormLabel>
